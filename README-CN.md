@@ -1,4 +1,4 @@
-# Sirpair OS
+# Sirpair OS （<a href="/README">English</a>）
 
 <blockquote>
 想要获取最新进展，请访问 Sirpair OS 网站主页：<a href="http://sirpair.com">http://sirpair.com</a>，联系：<a href="mailto:os-dev@sirpair.com">os-dev@sirpair.com</a>
