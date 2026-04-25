@@ -1,0 +1,5 @@
+print("LUA_REGRESS_START")
+print(1 + 1)
+print("Hello")
+print('Hello')
+print('a' .. 'b')

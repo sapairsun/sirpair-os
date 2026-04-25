@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+if [ "$#" -lt 2 ]; then
+  echo "usage: timeout <seconds> <command> [args...]" >&2
+  exit 2
+fi
+seconds="$1"
+shift
+
+"$@" &
+cmd_pid=$!
+
+(
+  sleep "$seconds"
+  kill -TERM "$cmd_pid" 2>/dev/null || true
+  sleep 2
+  kill -KILL "$cmd_pid" 2>/dev/null || true
+) &
+watchdog_pid=$!
+
+set +e
+wait "$cmd_pid"
+rc=$?
+set -e
+
+kill "$watchdog_pid" 2>/dev/null || true
+wait "$watchdog_pid" 2>/dev/null || true
+exit "$rc"

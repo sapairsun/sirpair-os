@@ -1,0 +1,18 @@
+*~
+build/
+sirpair-kernel.img
+sirpair.img
+sirpairmemfs.img
+.gdbinit
+*.tex
+*.dvi
+*.idx
+*.aux
+*.log
+*.ind
+*.ilg
+# Legacy files from root (before build/ directory migration)
+*.o
+*.d
+*.asm
+*.sym

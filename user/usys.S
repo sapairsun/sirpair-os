@@ -1,0 +1,57 @@
+#include "syscall.h"
+#include "traps.h"
+
+#define SYSCALL(name) \
+  .globl name; \
+  name: \
+    movl $SYS_ ## name, %eax; \
+    int $T_SYSCALL; \
+    ret
+
+SYSCALL(fork)
+SYSCALL(wait)
+SYSCALL(pipe)
+SYSCALL(read)
+SYSCALL(write)
+SYSCALL(close)
+SYSCALL(kill)
+SYSCALL(exec)
+SYSCALL(open)
+SYSCALL(mknod)
+SYSCALL(unlink)
+SYSCALL(fstat)
+SYSCALL(link)
+SYSCALL(mkdir)
+SYSCALL(chdir)
+SYSCALL(dup)
+SYSCALL(getpid)
+SYSCALL(sbrk)
+SYSCALL(sleep)
+SYSCALL(uptime)
+SYSCALL(time)
+SYSCALL(getprocs)
+SYSCALL(shutdown)
+SYSCALL(reboot)
+SYSCALL(info)
+SYSCALL(gui)
+SYSCALL(getcwd)
+SYSCALL(setfgpid)
+SYSCALL(socket)
+SYSCALL(bind)
+SYSCALL(listen)
+SYSCALL(accept)
+SYSCALL(connect)
+SYSCALL(send)
+SYSCALL(recv)
+SYSCALL(dhcp)
+SYSCALL(getnetcfg)
+SYSCALL(ping)
+SYSCALL(dig)
+SYSCALL(statfs)
+SYSCALL(lseek)
+SYSCALL(fdready)
+SYSCALL(recvfrom)
+SYSCALL(sendto)
+SYSCALL(consize)
+SYSCALL(mouse)
+SYSCALL(guimode)

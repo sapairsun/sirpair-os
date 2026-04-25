@@ -1,0 +1,110 @@
+beanstalkd(1) -- simple, fast work queue
+========================================
+
+## SYNOPSIS
+
+`beanstalkd` [<options>]
+
+## DESCRIPTION
+
+`Beanstalkd` is a simple work-queue service. Its interface is
+generic, though it was originally designed for reducing the latency of
+page views in high-volume web applications by running time-consuming
+tasks asynchronously.
+
+When started, `beanstalkd` opens a socket (or uses a file descriptor
+provided by the init(1) system, see [ENVIRONMENT][]) and listens for
+incoming connections. For each connection, it reads a sequence of
+commands to create, reserve, delete, and otherwise manipulate "jobs",
+units of work to be done. See file `doc/protocol.txt` in the
+`beanstalkd` distribution for a thorough description of the meaning
+and format of the `beanstalkd` protocol.
+
+## OPTIONS
+
+* `-b` <path>:
+  Use a binlog to keep jobs on persistent storage in directory <path>.
+  Upon startup, `beanstalkd` will recover any binlog that is present
+  in <path>, then, during normal operation, append new jobs and
+  changes in state to the binlog.
+
+* `-f` <ms>:
+  Call fsync(2) at most once every <ms> milliseconds. Larger values
+  for <ms> reduce disk activity and improve speed at the cost of
+  safety. A power failure could result in the loss of up to <ms>
+  milliseconds of history.
+
+  A <ms> value of 0 will cause `beanstalkd` to call fsync every time
+  it writes to the binlog.
+
+  The default behavior is to sync every 50 ms.
+
+  (This option has no effect without `-b`.)
+
+* `-F`:
+  Never call fsync(2). Equivalent to `-f` with an infinite <ms> value.
+
+  (This option has no effect without `-b`.)
+
+* `-h`:
+  Show a brief help message and exit.
+
+* `-l` <addr>:
+  Listen on address <addr> (default is 0.0.0.0).
+
+  When <addr> starts with "unix:", the unprefixed value of it will be
+  used as the local filesystem path to create a UNIX socket instead of
+  a TCP socket. In this case the value of `-p` will be ignored.
+
+  (Option `-l` has no effect if sd-daemon(5) socket activation is
+  being used. See also [ENVIRONMENT][].)
+
+* `-p` <port>:
+  Listen on TCP port <port> (default is 11300).
+
+  (Option `-p` has no effect if sd-daemon(5) socket activation is
+  being used. See also [ENVIRONMENT][].)
+
+* `-s` <bytes>:
+  The size in bytes of each binlog file.
+
+  (This option has no effect without `-b`.)
+
+* `-u` <user>:
+  Become the user <user> and its primary group.
+
+* `-V`:
+  Increase verbosity. May be used more than once to produce more
+  verbose output. The output format is subject to change.
+
+* `-v`:
+  Print the version string and exit.
+
+* `-z` <bytes>:
+  The maximum size in bytes of a job.
+
+* `-c`:
+  This flag has no effect. It is kept for historical compatibility only.
+
+* `-n`:
+  This flag has no effect. It is kept for historical compatibility only.
+
+## ENVIRONMENT
+
+* `LISTEN_PID`, `LISTEN_FDS`:
+  These variables can be set by init(1). See sd_listen_fds(3) for
+  details.
+
+## SEE ALSO
+
+sd-daemon(3), sd_listen_fds(3)
+
+Files `README.md` and `doc/protocol.txt` in the `beanstalkd`
+distribution.
+
+<https://beanstalkd.github.io/>
+
+## AUTHOR
+
+`Beanstalkd` is written by Keith Rarick and maintained by the community at
+<https://github.com/beanstalkd/beanstalkd/issues>
