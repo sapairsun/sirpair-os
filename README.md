@@ -1,7 +1,7 @@
 # Sirpair OS
 
 <blockquote>
-想要获取最新进展，请访问 Sirpair OS 网站主页：<a href="http://sirpair.com">http://sirpair.com</a>, 联系：<a href="mailto:os-dev@sirpair.com">os-dev@sirpair.com</a>
+想要获取最新进展，请访问 Sirpair OS 网站主页：<a href="http://sirpair.com">http://sirpair.com</a>，联系：<a href="mailto:os-dev@sirpair.com">os-dev@sirpair.com</a>
 </blockquote>
 
 Sirpair OS 是一款32 位 x86 操作系统，目标硬件为 ThinkPad X220/X223等机型，同时支持在 QEMU 等模拟器中运行。该项目采用了部分 xv6/linux 教学型内核结构，开发并具备了USB 启动、网络、图形、用户态工具链和第三方程序移植能力，并移植了lua、tcc和beanstalk等著名开源软件。
